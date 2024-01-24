@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-function checkFileExists(file) {
+async function checkFileExists(file) {
   return fs.access(file, fs.constants.F_OK)
     .then(() => true)
     .catch(() => false)
@@ -23,5 +23,3 @@ const create = async () => {
 };
 
 await create();
-
-// throw new Error('FS operation failed');
