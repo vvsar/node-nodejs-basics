@@ -8,10 +8,16 @@ const spawnChildProcess = async (args) => {
   const child = fork(`${__dirname}/files/script.js`, args);
 
   const welcome = `Hello!
-Type yor text below arguments and press ENTER.
-To quit, press Ctrl^C or type 'CLOSE' and press ENTER\n`;
+Type your text below arguments and press ENTER.
+To quit, press Ctrl^C or type 'CLOSE' and press ENTER.
+
+`;
 
   const farewell = '\nThank you! Have a nice day!\n';
+
+  child.on('message', (message) => {
+    console.log(message.toString());
+  });
 
   process.on('exit', () => {
     process.stdout.write(farewell);
@@ -22,6 +28,7 @@ To quit, press Ctrl^C or type 'CLOSE' and press ENTER\n`;
   });
   
   process.stdout.write(welcome);
+  
 };
 
 spawnChildProcess(['ho-ho-ho', 'ha-ha-ha']);
